@@ -29,9 +29,12 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
+              SizedBox(
+                height: 50,
+              ),
               // Image Section
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 80),
+                padding: const EdgeInsets.symmetric(vertical: 50),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(0),
                   child: Image.asset(
@@ -45,7 +48,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
               // Heading Text
               const HeadingText('Please Select Your Language'),
               // Subheading Text
-              const SubheadingText('You can change the language at anytime'),
+              const SubheadingText('You can change the language \n at anytime'),
               // Language Dropdown
               LanguageDropdown(
                 selectedLanguage: _selectedLanguage!,
@@ -65,8 +68,8 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     ),
                   );
                 },
-                width: 255,
-                height: 50,
+                width: 280,
+                height: 60,
                 text: 'NEXT',
               ),
             ],

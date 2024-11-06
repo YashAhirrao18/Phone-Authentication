@@ -14,7 +14,7 @@ class LanguageDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 70),
+      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 70),
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),

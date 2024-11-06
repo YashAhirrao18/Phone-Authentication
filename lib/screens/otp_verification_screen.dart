@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import '../widgets/custom_popup.dart';
 import '../widgets/heading_text.dart';
 import '../widgets/otp_input_field.dart';
 import '../widgets/subheading_text.dart';
@@ -42,8 +43,16 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
     // Optionally show a message that the OTP was resent
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('OTP resent successfully')),
+      showDialog(
+        context: context,
+        barrierDismissible: false, // Prevent dismissing by tapping outside
+        builder: (BuildContext context) {
+          return const CustomPopupDialog(
+            title: 'OTP Sent !',
+            content: 'New OTP has been sent to Mobile Number',
+            buttonText: 'Got it', // Custom button text
+          );
+        },
       );
     }
   }
@@ -71,12 +80,14 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(
+                  height: 100,
+                ),
                 const HeadingText('Verify Phone'),
                 const SizedBox(height: 10),
                 SubheadingText("Code is sent to ${widget.mobileNumber}"),
-                const SizedBox(height: 10),
+                const SizedBox(height: 25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: List.generate(6, (index) {
@@ -93,14 +104,14 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                     );
                   }),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 25),
                 RichText(
                   text: TextSpan(
                     style: const TextStyle(fontSize: 14, color: Colors.black),
                     children: [
                       const TextSpan(text: "Didn’t receive code? "),
                       TextSpan(
-                        text: "Request again",
+                        text: "Request Again",
                         style: TextStyle(
                           color: _isResendDisabled
                               ? Colors.grey
@@ -113,7 +124,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 25),
                 NextButton(
                   onPressed: () async {
                     String otp = otpControllers.map((c) => c.text).join();
@@ -127,14 +138,23 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                         (route) => false,
                       );
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Invalid OTP')),
+                      showDialog(
+                        context: context,
+                        barrierDismissible:
+                            false, // Prevent dismissing by tapping outside
+                        builder: (BuildContext context) {
+                          return const CustomPopupDialog(
+                            title: 'Invalid OTP',
+                            content: 'Kindly enter valid OTP and try again',
+                            buttonText: 'Got it', // Custom button text
+                          );
+                        },
                       );
                     }
                   },
-                  width: 350,
-                  height: 50,
-                  text: 'Verify and Continue',
+                  width: 370,
+                  height: 60,
+                  text: 'VERIFY AND CONTINUE',
                 ),
               ],
             ),

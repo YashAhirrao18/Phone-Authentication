@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phone_auth/widgets/custom_popup.dart';
 import '../services/auth_service.dart';
 import '../widgets/heading_text.dart'; // Import your HeadingText widget
 import '../widgets/subheading_text.dart'; // Import your SubheadingText widget
@@ -20,17 +21,21 @@ class MobileNumberScreen extends StatelessWidget {
         backgroundColor: Colors.white, // Set background to white
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center, // Center the content
               children: [
+                const SizedBox(
+                  height: 120,
+                ),
                 // Heading Text
                 const HeadingText('Please Enter Your Mobile Number'),
                 const SizedBox(height: 10),
                 // Subheading Text
                 const SubheadingText(
-                    'You will receive a 6-digit code to verify next'),
+                    'You will receive a 6-digit code \n to verify next'),
                 const SizedBox(height: 20),
                 // Mobile number input field
                 TextField(
@@ -43,11 +48,15 @@ class MobileNumberScreen extends StatelessWidget {
                         Image(
                           image: AssetImage(
                               'assets/images/india_flag.png'), // Ensure you have the flag image in your assets
-                          height: 20, // Adjust height as necessary
-                          width: 30, // Adjust width as necessary
+                          height: 30, // Adjust height as necessary
+                          width: 50, // Adjust width as necessary
                         ),
                         SizedBox(width: 8),
-                        Text('+91'), // Country code
+                        Text(
+                          '+91       \t\t\t- ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ), // Country code
+                        SizedBox(width: 40),
                       ],
                     ),
                     border: OutlineInputBorder(),
@@ -55,7 +64,7 @@ class MobileNumberScreen extends StatelessWidget {
                   ),
                   keyboardType: TextInputType.phone,
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 25),
                 // Next Button
                 NextButton(
                   onPressed: () async {
@@ -70,16 +79,23 @@ class MobileNumberScreen extends StatelessWidget {
                         ),
                       );
                     } else {
-                      // Show an error message if mobile number is empty
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please enter a valid mobile number'),
-                        ),
+                      showDialog(
+                        context: context,
+                        barrierDismissible:
+                            false, // Prevent dismissing by tapping outside
+                        builder: (BuildContext context) {
+                          return const CustomPopupDialog(
+                            title: 'Invalid Mobile Number',
+                            content: 'Please enter a valid mobile number',
+                            buttonText: 'Got it', // Custom button text
+                          );
+                        },
                       );
+                      // Show an error message if mobile number is empty
                     }
                   },
-                  width: 365,
-                  height: 50,
+                  width: 370,
+                  height: 60,
                   text: 'CONTINUE',
                 ),
               ],

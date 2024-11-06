@@ -16,13 +16,13 @@ class OTPInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 50,
-      height: 50,
+      width: 55,
+      height: 55,
       child: Container(
         decoration: BoxDecoration(
           color: AppStyles.otpBoxColor, // Background color for OTP input
           borderRadius:
-              BorderRadius.circular(8), // Circular radius for better aesthetics
+              BorderRadius.circular(0), // Circular radius for better aesthetics
         ),
         child: TextField(
           controller: controller,

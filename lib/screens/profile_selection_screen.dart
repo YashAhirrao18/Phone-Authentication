@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import '../widgets/heading_text.dart'; // Import your HeadingText widget
 import '../widgets/next_button.dart'; // Import your NextButton widget
@@ -19,14 +21,17 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen> {
       body: Padding(
         padding: const EdgeInsets.all(14.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(
+              height: 120,
+            ),
             // Heading Text
             const HeadingText('Select Your Profile'),
-            const SizedBox(height: 20),
+            const SizedBox(height: 25),
 
             // Container for Shipper profile selection
             Container(
+              height: 100,
               decoration: BoxDecoration(
                 border:
                     Border.all(color: Colors.black, width: 1), // Black border
@@ -78,6 +83,7 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen> {
 
             // Container for Transport profile selection
             Container(
+              height: 100,
               decoration: BoxDecoration(
                 border:
                     Border.all(color: Colors.black, width: 1), // Black border
@@ -125,10 +131,11 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen> {
               ),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 25),
             NextButton(
               text: 'CONTINUE',
-              width: 370, // Custom width for the button
+              height: 60,
+              width: 380, // Custom width for the button
               onPressed: () {
                 if (selectedProfile != null) {
                   // Navigate to the next screen after selection
